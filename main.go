@@ -1,24 +1,19 @@
 package main
+
 import (
-	"fmt"
+	"github.com/byReqz/nanoservices/services"
+	log "github.com/byReqz/slug"
 	"net/http"
-	"github.com/byReqz/nanoservices/demo"
 )
 
-var Active []Service
-
-type Service struct {
-	Name string
-	Handle string
-	Description string
-	Handler Handler
-}
-
-type Handler interface {
-	Run(w http.ResponseWriter, req *http.Request)
-	Register(*[]Service)
+func init() {
+	log.DefaultLogger.SetLevel(log.InfoLevel)
 }
 
 func main() {
-	
+	for _, service := range services.Active {
+		http.HandleFunc(service.Path, service.Handler)
+		log.Info("enabling service " + service.Name + " on " + service.Handle)
+	}
+	log.Fatal(http.ListenAndServe(":8080", nil))
 }
