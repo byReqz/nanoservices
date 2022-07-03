@@ -2,7 +2,10 @@ module github.com/byReqz/nanoservices
 
 go 1.18
 
-require github.com/byReqz/slug v0.0.0-20220630081529-c211e550e25b
+require (
+	github.com/byReqz/slug v0.0.0-20220703003056-1a154260e41e
+	github.com/spf13/pflag v1.0.5
+)
 
 require (
 	github.com/fatih/color v1.13.0 // indirect
