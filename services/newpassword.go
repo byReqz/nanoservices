@@ -3,6 +3,7 @@ package services
 import (
 	"crypto/rand"
 	"fmt"
+	log "github.com/byReqz/slug"
 	"math/big"
 	"net/http"
 )
@@ -25,7 +26,9 @@ func passwordhandler(w http.ResponseWriter, req *http.Request) {
 	for i := 0; i < 32; i++ {
 		rng, err := rand.Int(rand.Reader, big.NewInt(int64((len(charset) - 1))))
 		if err != nil {
-			pw = err.Error()
+			w.WriteHeader(500)
+			pw = "500 internal server error: " + err.Error()
+			log.Error("error generating password:", err.Error())
 			break
 		}
 		pw = pw + string(charset[rng.Int64()])
