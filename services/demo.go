@@ -2,7 +2,6 @@ package services
 
 import (
 	"fmt"
-	log "github.com/byReqz/slug"
 	"net/http"
 )
 
@@ -16,6 +15,6 @@ func init() {
 }
 
 func demohandler(w http.ResponseWriter, req *http.Request) {
-	log.Debug("demoservice has been accessed by", req.RemoteAddr)
+	Announce(req)
 	fmt.Fprintln(w, "nanoservices is running")
 }

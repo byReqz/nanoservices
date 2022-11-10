@@ -16,6 +16,7 @@ func init() {
 }
 
 func myip(w http.ResponseWriter, req *http.Request) {
+	Announce(req)
 	if req.Header.Get("X-Forwarded-For") != "" {
 		log.Debug("service: myip,", "remote_ip:", req.Header.Get("X-Forwarded-For"))
 		fmt.Fprintln(w, req.Header.Get("X-Forwarded-For"))

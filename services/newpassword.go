@@ -17,6 +17,7 @@ func init() {
 }
 
 func passwordhandler(w http.ResponseWriter, req *http.Request) {
+	Announce(req)
 	var (
 		pw      string
 		charset string = "abcdedfghijklmnopqrstABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%*_-0123456789"
